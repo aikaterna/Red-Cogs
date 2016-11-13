@@ -63,7 +63,7 @@ class RandomStatus:
                 self.last_change = int(time.perf_counter())
                 if len(self.statuses) > 0 and (current_status in self.statuses or current_status == "None"):
                     new_status = self.random_status(message)
-                    await self.bot.change_status(discord.Game(name=new_status))
+                    await self.bot.change_presence(game=discord.Game(name=new_status))
 
             if message.author.id != self.bot.user.id:
                 if abs(self.last_change - int(time.perf_counter())) >= self.settings["DELAY"]:
@@ -72,7 +72,7 @@ class RandomStatus:
                     if new_status != None:
                         if current_status != new_status:  
                             if current_status in self.statuses or current_status == "None": #Prevents rndstatus from overwriting song's titles or
-                                await self.bot.change_status(discord.Game(name=new_status)) #custom statuses set with !set status
+                                await self.bot.change_presence(game=discord.Game(name=new_status)) #custom statuses set with !set status
 
     def random_status(self, msg):
         current = str(msg.server.me.game)
